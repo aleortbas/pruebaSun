@@ -1,17 +1,21 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
-import {NavbarBrand, Navbar} from 'reactstrap';
+import Main from './components/MainComponent';
+import HeaderComponent from './components/HeaderComponent';
+import FooterComponent from './components/FooterComponent';
 
-function App() {
+import { BrowserRouter } from 'react-router-dom';
+
+class App extends Component {
+
+
+render(){
   return (
-    <div className="App">
-     <Navbar dark color="primary">
-       <div className="Container">
-         <NavbarBrand href="/"> Ristorante con fusion</NavbarBrand>
-       </div>
-     </Navbar>
-    </div>
+      <div>
+        <Main />
+      </div>
   );
+}
 }
 
 export default App;
