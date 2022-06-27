@@ -18,7 +18,7 @@ class Main extends Component {
             <div>
             <Header/>
             <Routes>
-            <Route path='/home' element={<HomePage/>} />
+            <Route path='/' element={<HomePage/>} />
             </Routes>
             <Footer/>
             </div>
