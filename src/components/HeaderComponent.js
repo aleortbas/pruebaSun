@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { NavbarBrand, Navbar, Nav, NavbarToggler, Collapse, NavItem, 
     Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input} from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import { async } from '@firebase/util';
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 class Header extends Component {
 
@@ -103,12 +105,14 @@ class Header extends Component {
                             <FormGroup>
                                 <Label htmlFor="email">Correo electronico</Label>
                                 <Input type="email" id="email" name="email"
-                                    innerRef={(input) => this.userame = input}/>
+                                    innerRef={(input) => this.userame = input}
+                                    />
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor="password">Contraseña</Label>
                                 <Input type="password" id="password" name="password"
-                                    innerRef={(input) => this.password = input}/>
+                                    innerRef={(input) => this.password = input}
+                                    />
                             </FormGroup>
                             <FormGroup check>
                                 <Label check>

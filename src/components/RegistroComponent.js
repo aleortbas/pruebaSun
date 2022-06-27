@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Breadcrumb, BreadcrumbItem, Row, Label, Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import { render } from "react-dom";
 import { Form, Field } from "react-final-form";
+import { async } from "@firebase/util";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../fb";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -21,9 +23,23 @@ const composeValidators =
       undefined
     );
 
+function Registro (){
+    const [registerEmail, setRegisterEmail] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
 
-class Registro extends Component {
-  render() {
+    const register = async () => {
+      try {
+        const user = await createUserWithEmailAndPassword(
+          auth,
+          registerEmail,
+          registerPassword
+        );
+        console.log(user);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
     return (
       <div className="container">
         <div className="row">
@@ -87,9 +103,15 @@ class Registro extends Component {
                     <label>Tipo documento</label>
                     <br></br>
                     <Field name="tipoDocumento" component="select">
-                      <option/>
-                      <option value="Cedula de ciudadania"> Cedula de ciudadania</option>
-                      <option value="Tarjeta de identidad"> Tarjeta de identidad</option>
+                      <option />
+                      <option value="Cedula de ciudadania">
+                        {" "}
+                        Cedula de ciudadania
+                      </option>
+                      <option value="Tarjeta de identidad">
+                        {" "}
+                        Tarjeta de identidad
+                      </option>
                       <option value="Pasaporte"> Pasaporte</option>
                     </Field>
                   </div>
@@ -140,6 +162,9 @@ class Registro extends Component {
                           className="form-control"
                           type="email"
                           placeholder="Ingrese su correo electronico"
+                          onInput={(event) => {
+                            setRegisterEmail(event.target.value);
+                        }}
                         />
                         {meta.error && meta.touched && (
                           <span>{meta.error}</span>
@@ -156,6 +181,9 @@ class Registro extends Component {
                           className="form-control"
                           type="email"
                           placeholder="Ingrese nuevamente su correo electronico"
+                          onInput={(event) => {
+                            setRegisterEmail(event.target.value);
+                        }}
                         />
                         {meta.error && meta.touched && (
                           <span>{meta.error}</span>
@@ -172,6 +200,9 @@ class Registro extends Component {
                           className="form-control"
                           type="password"
                           placeholder="Ingrese su contraseña"
+                          onInput={(event) => {
+                            setRegisterPassword(event.target.value);
+                        }}
                         />
                         {meta.error && meta.touched && (
                           <span>{meta.error}</span>
@@ -180,7 +211,7 @@ class Registro extends Component {
                     )}
                   </Field>
                   <div className="buttons">
-                    <Button type="submit" disabled={submitting}>
+                    <Button onClick={register} disabled={submitting}>
                       Registrar
                     </Button>
                     <Button
@@ -200,6 +231,5 @@ class Registro extends Component {
       </div>
     );
   }
-}
 
 export default Registro;
