@@ -163,6 +163,22 @@ class Registro extends Component {
                       </div>
                     )}
                   </Field>
+                  <Field name="contraseña" validate={required}>
+                    {({ input, meta }) => (
+                      <div>
+                        <Label>Contraseña</Label>
+                        <input
+                          {...input}
+                          className="form-control"
+                          type="password"
+                          placeholder="Ingrese su contraseña"
+                        />
+                        {meta.error && meta.touched && (
+                          <span>{meta.error}</span>
+                        )}
+                      </div>
+                    )}
+                  </Field>
                   <div className="buttons">
                     <Button type="submit" disabled={submitting}>
                       Registrar
