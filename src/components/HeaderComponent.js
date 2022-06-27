@@ -71,8 +71,8 @@ class Header extends Component {
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" to="/aboutus">
-                                        <span className="fa fa-info fa-lg"></span> Terminos y Condiciones
+                                    <NavLink className="nav-link" to="/registro">
+                                        <span className="fa fa-user fa-lg"></span> Registrar Usuario
                                     </NavLink>
                                 </NavItem>
                                 <Nav className="justify-content-end">
