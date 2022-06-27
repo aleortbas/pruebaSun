@@ -162,7 +162,7 @@ function Registro (){
                           className="form-control"
                           type="email"
                           placeholder="Ingrese su correo electronico"
-                          onInput={(event) => {
+                          onChange={(event) => {
                             setRegisterEmail(event.target.value);
                         }}
                         />
@@ -181,7 +181,7 @@ function Registro (){
                           className="form-control"
                           type="email"
                           placeholder="Ingrese nuevamente su correo electronico"
-                          onInput={(event) => {
+                          onChange={(event) => {
                             setRegisterEmail(event.target.value);
                         }}
                         />

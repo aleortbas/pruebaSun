@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Home from './HomeComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
-
-import { Routes, Route, } from 'react-router-dom';
 import Registro from './RegistroComponent';
+import Login from './login'
+import { Routes, Route, } from 'react-router-dom';
 
 class Main extends Component {
     render(){
@@ -20,6 +20,11 @@ class Main extends Component {
                 <Registro />
             );
         }
+        const LoginPage = () => {
+            return(
+                <Login />
+            );
+        }
 
         return(
             <div>
@@ -27,6 +32,7 @@ class Main extends Component {
             <Routes>
                 <Route path='/' element={<HomePage/>} />
                 <Route path='/registro' element={<RegistroPage/>} />
+                <Route path='/login' element={<LoginPage/>} />
             </Routes>
             <Footer/>
             </div>
