@@ -1,8 +1,8 @@
-import React, { Component, useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Breadcrumb, BreadcrumbItem, Row, Label, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Form, Field } from "react-final-form";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { auth, db } from "../fb";
 
@@ -22,8 +22,16 @@ const composeValidators =
       (error, validator) => error || validator(value),
       undefined
     );
+    
 
 function Registro() {
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+  }, []);
+
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerNombre, setRegisterNombre] = useState("");
@@ -31,6 +39,7 @@ function Registro() {
   const [registerTipoDoc, setTipoDoc] = useState("");
   const [registerNumDoc, setNumDoc] = useState("");
   const [registerNumCel, setNumCel] = useState("");
+  const [user, setUser] = useState({});
 
   const register = async () => {
     try {
@@ -49,8 +58,10 @@ function Registro() {
         created: Timestamp.now(),
       });
       console.log(user);
+      alert("Registro de usuario exitoso con correo: " + registerEmail);
     } catch (error) {
       console.log(error.message);
+      alert(error.message)
     }
   };
 
@@ -232,6 +243,7 @@ function Registro() {
                     Borrar
                   </Button>
                 </div>
+                <h4> Usuario registrado: {user ? user.email : "Sin registro"}</h4>
               </form>
             )}
           />
