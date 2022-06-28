@@ -231,7 +231,6 @@ function Registro() {
                     Borrar
                   </Button>
                 </div>
-                <pre>{JSON.stringify(values, 0, 2)}</pre>
               </form>
             )}
           />

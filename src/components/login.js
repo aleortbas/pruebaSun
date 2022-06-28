@@ -1,12 +1,31 @@
 import { useState, useEffect } from "react";
 import {
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  Label,
+  Button,
+  Card,
+  CardTitle,
+  CardBody,
+  CardSubtitle,
+} from "reactstrap";
+import { Link, Navigate } from "react-router-dom";
+import { Form, Field } from "react-final-form";
 import "../App";
 import { auth } from "../fb";
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const onSubmit = async (values) => {
+  await sleep(300);
+  window.alert(JSON.stringify(values, 0, 2));
+};
+const required = (value) => (value ? undefined : "CAMPO OBLIGATORIO");
 
 function App() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -43,28 +62,96 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div>
-        <h3> Login </h3>
-        <input
-          placeholder="Email..."
-          onChange={(event) => {
-            setLoginEmail(event.target.value);
-          }}
-        />
-        <input
-          placeholder="Password..."
-          onChange={(event) => {
-            setLoginPassword(event.target.value);
-          }}
-        />
-
-        <button onClick={login}> Login</button>
+    <div className="container">
+      <div className="row">
+        <Breadcrumb>
+          <BreadcrumbItem>
+            <Link to="/">Inicio</Link>
+          </BreadcrumbItem>
+          <BreadcrumbItem active>Login</BreadcrumbItem>
+        </Breadcrumb>
+        <div className="col-12">
+          <h3>Iniciar sesion</h3>
+          <hr />
+        </div>
       </div>
 
-      <h4> User Logged In: {user?user.email :"Not Loggen In"}</h4>
-
-      <button onClick={logout}> Sign Out </button>
+      <div className="row row-content">
+        <div className="col-12 col-md-4">
+          <Card>
+            <CardTitle>
+              <div className="item-container">
+                <h2 className="log-in">Inicio De Sesion</h2>
+              </div>
+            </CardTitle>
+            <CardSubtitle>
+              <a href="http://youtube.com/">
+                <i className="fa fa-google fa-2x"></i>
+              </a>
+            </CardSubtitle>
+            <CardBody>
+              <div className="item-container">
+                <Form
+                  onSubmit={onSubmit}
+                  render={({ handleSubmit, form, submitting, pristine }) => (
+                    <form onSubmit={handleSubmit}>
+                      <Field name="email" validate={required}>
+                        {({ meta }) => (
+                          <div>
+                            <Label>Correo electronico</Label>
+                            <input
+                              className="form-control"
+                              type="email"
+                              placeholder="Ingrese su correo electronico"
+                              onChange={(event) => {
+                                setLoginEmail(event.target.value);
+                              }}
+                            />
+                            {meta.error && meta.touched && (
+                              <span>{meta.error}</span>
+                            )}
+                          </div>
+                        )}
+                      </Field>
+                      <Field name="contraseña" validate={required}>
+                        {({ meta }) => (
+                          <div>
+                            <Label>Contraseña</Label>
+                            <input
+                              className="form-control"
+                              type="password"
+                              placeholder="Ingrese su contraseña"
+                              onInput={(event) => {
+                                setLoginPassword(event.target.value);
+                              }}
+                            />
+                            {meta.error && meta.touched && (
+                              <span>{meta.error}</span>
+                            )}
+                          </div>
+                        )}
+                      </Field>
+                      <div className="buttons">
+                        <Button onClick={login} disabled={submitting}>
+                          Registrar
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={logout}
+                          disabled={submitting}
+                        >
+                          Cerrar sesion
+                        </Button>
+                      </div>
+                    </form>
+                  )}
+                />
+              </div>
+            </CardBody>
+          </Card>
+          <h4> User Logged In: {user ? user.email : "Not Loggen In"}</h4>
+        </div>
+      </div>
     </div>
   );
 }
