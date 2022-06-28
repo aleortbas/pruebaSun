@@ -39,6 +39,7 @@ function Registro() {
   const [registerTipoDoc, setTipoDoc] = useState("");
   const [registerNumDoc, setNumDoc] = useState("");
   const [registerNumCel, setNumCel] = useState("");
+  const [registerTerminos, setTerminos] = useState("");
   const [user, setUser] = useState({});
 
   const register = async () => {
@@ -54,6 +55,7 @@ function Registro() {
         document: registerTipoDoc,
         documentId: registerNumDoc,
         phoneNumber: registerNumCel,
+        terminos: registerTerminos,
         completed: false,
         created: Timestamp.now(),
       });
@@ -226,6 +228,15 @@ function Registro() {
                           setRegisterPassword(event.target.value);
                         }}
                       />
+                      {meta.error && meta.touched && <span style={{color:"red", textDecoration:"underline"}}>{meta.error}</span>}
+                    </div>
+                  )}
+                </Field>
+                <Field name="terminos">
+                {({ input, meta }) => (
+                    <div>
+                      <Label style={{marginRight:"5%"}}>Terminos y condiciones</Label>
+                      <input type="radio" value="Aceptar" name="terminos" onInput={(event)=>{setTerminos(event.target.value)}}/> aceptar
                       {meta.error && meta.touched && <span style={{color:"red", textDecoration:"underline"}}>{meta.error}</span>}
                     </div>
                   )}
