@@ -9,8 +9,6 @@ import "../App";
 import { auth } from "../fb";
 
 function App() {
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
@@ -21,18 +19,6 @@ function App() {
   }, []);
 
   const [user, setUser] = useState({});
-
-  const register = async () => {
-    try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      );
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
   const login = async () => {
     try {
@@ -58,24 +44,6 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <h3> Register User </h3>
-        <input
-          placeholder="Email..."
-          onChange={(event) => {
-            setRegisterEmail(event.target.value);
-          }}
-        />
-        <input
-          placeholder="Password..."
-          onChange={(event) => {
-            setRegisterPassword(event.target.value);
-          }}
-        />
-
-        <button onClick={register}> Create User</button>
-      </div>
-
       <div>
         <h3> Login </h3>
         <input
