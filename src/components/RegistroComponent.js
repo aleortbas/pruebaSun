@@ -88,7 +88,7 @@ function Registro() {
                           setRegisterNombre(event.target.value);
                         }}
                       />
-                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                      {meta.error && meta.touched && <span style={{color:"red", textDecoration:"underline"}}>{meta.error}</span>}
                     </div>
                   )}
                 </Field>
@@ -105,7 +105,7 @@ function Registro() {
                           setRegisterApellido(event.target.value);
                         }}
                       />
-                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                      {meta.error && meta.touched && <span style={{color:"red", textDecoration:"underline"}}>{meta.error}</span>}
                     </div>
                   )}
                 </Field>
@@ -143,7 +143,7 @@ function Registro() {
                           setNumDoc(event.target.value);
                         }}
                       />
-                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                      {meta.error && meta.touched && <span style={{color:"red", textDecoration:"underline"}}>{meta.error}</span>}
                     </div>
                   )}
                 </Field>
@@ -163,7 +163,7 @@ function Registro() {
                           setNumCel(event.target.value);
                         }}
                       />
-                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                      {meta.error && meta.touched && <span style={{color:"red", textDecoration:"underline"}}>{meta.error}</span>}
                     </div>
                   )}
                 </Field>
@@ -181,7 +181,7 @@ function Registro() {
                           setRegisterEmail(event.target.value);
                         }}
                       />
-                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                      {meta.error && meta.touched && <span style={{color:"red", textDecoration:"underline"}}>{meta.error}</span>}
                     </div>
                   )}
                 </Field>
@@ -198,7 +198,7 @@ function Registro() {
                           setRegisterEmail(event.target.value);
                         }}
                       />
-                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                      {meta.error && meta.touched && <span style={{color:"red", textDecoration:"underline"}}>{meta.error}</span>}
                     </div>
                   )}
                 </Field>
@@ -215,18 +215,19 @@ function Registro() {
                           setRegisterPassword(event.target.value);
                         }}
                       />
-                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                      {meta.error && meta.touched && <span style={{color:"red", textDecoration:"underline"}}>{meta.error}</span>}
                     </div>
                   )}
                 </Field>
                 <div className="buttons">
-                  <Button onClick={register} disabled={submitting}>
+                  <Button onClick={register} disabled={submitting} style={{marginRight:"5%", marginTop:"3%"}}>
                     Registrar
                   </Button>
                   <Button
                     type="button"
                     onClick={form.reset}
                     disabled={submitting || pristine}
+                    style={{marginTop:"3%"}}
                   >
                     Borrar
                   </Button>

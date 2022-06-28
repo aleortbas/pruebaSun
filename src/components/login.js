@@ -76,69 +76,69 @@ function App() {
         </div>
       </div>
 
-      <div className="row row-content">
+      <div className="row-content centerCard">
         <div className="col-12 col-md-4">
-          <Card>
+          <Card className="card">
             <CardTitle>
               <div className="item-container">
                 <h2 className="log-in">Inicio De Sesion</h2>
               </div>
             </CardTitle>
-            <CardSubtitle>
-              <a href="http://youtube.com/">
-                <i className="fa fa-google fa-2x"></i>
-              </a>
-            </CardSubtitle>
             <CardBody>
-              <div className="item-container">
+              <div className="item-container-inner">
                 <Form
                   onSubmit={onSubmit}
                   render={({ handleSubmit, form, submitting, pristine }) => (
                     <form onSubmit={handleSubmit}>
                       <Field name="email" validate={required}>
-                        {({ meta }) => (
+                        {({ input ,meta }) => (
                           <div>
                             <Label>Correo electronico</Label>
                             <input
+                              {...input}
                               className="form-control"
                               type="email"
                               placeholder="Ingrese su correo electronico"
-                              onChange={(event) => {
+                              style={{marginTop: "2%"}}
+                              onInput={(event) => {
                                 setLoginEmail(event.target.value);
                               }}
                             />
                             {meta.error && meta.touched && (
-                              <span>{meta.error}</span>
+                              <span style={{color:"red", textDecoration:"underline"}}>{meta.error}</span>
                             )}
                           </div>
                         )}
                       </Field>
                       <Field name="contraseña" validate={required}>
-                        {({ meta }) => (
+                        {({ input, meta }) => (
                           <div>
-                            <Label>Contraseña</Label>
+                            <Label style={{marginTop: "5%"}}>Contraseña</Label>
                             <input
+                              {...input}                            
                               className="form-control"
                               type="password"
                               placeholder="Ingrese su contraseña"
+                              style={{marginTop: "2%"}}
                               onInput={(event) => {
                                 setLoginPassword(event.target.value);
                               }}
                             />
                             {meta.error && meta.touched && (
-                              <span>{meta.error}</span>
+                              <span style={{color:"red", textDecoration:"underline"}}>{meta.error}</span>
                             )}
                           </div>
                         )}
                       </Field>
                       <div className="buttons">
-                        <Button onClick={login} disabled={submitting}>
+                        <Button style={{marginRight: "5%", marginTop: "5%"}} onClick={login} disabled={submitting}>
                           Registrar
                         </Button>
                         <Button
                           type="button"
                           onClick={logout}
                           disabled={submitting}
+                          style={{marginLeft: "5%", marginTop: "5%"}}
                         >
                           Cerrar sesion
                         </Button>
